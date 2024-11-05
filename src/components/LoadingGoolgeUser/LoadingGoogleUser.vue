@@ -24,7 +24,7 @@ onMounted(() => {
         store.commit("user/setUser", { email: userData.sub, id: userData.id });
 
         // Redirect after successful login
-        window.location.replace("/adviser_alli/home");
+        window.location.replace("/adviser_elli/home");
       })
       .catch((error) => {
         console.error("Error during API request:", error);

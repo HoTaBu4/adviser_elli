@@ -37,7 +37,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory("/adviser_alli"),
+  history: createWebHistory("/adviser_elli"),
   routes,
 });
 

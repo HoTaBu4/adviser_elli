@@ -1,5 +1,12 @@
 <script lang="ts" setup>
 import Header from "../CommonComponents/Header/Header.vue";
+import eventBus from '../../eventBus'
+import { onMounted } from 'vue'
+console.log(eventBus)
+
+onMounted(() => {
+  eventBus.emit("add-message", { text: "Your message", duration: 5 });
+});
 </script>
 
 <template>

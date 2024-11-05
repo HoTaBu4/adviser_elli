@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import PopUpMessage from "./PopUpMessage/PopUpMessage.vue";
+import mitt from "mitt";
+import eventBus from '@/eventBus'
 
 interface Message {
   id: number;
@@ -13,6 +15,7 @@ const messages = ref<Message[]>([]);
 // Function to add a new message
 const addMessage = (text: string, duration = 5) => {
   messages.value.unshift({ id: Date.now(), text, duration});
+  console.log('add')
 };
 
 // Function to remove a message at a given index
@@ -22,6 +25,15 @@ const removeMessage = (id: number) => {
     messages.value.splice(index, 1);
   }
 };
+
+onMounted(() => {
+  eventBus.on("add-message", addMessage);
+});
+
+onUnmounted(() => {
+  eventBus.off("add-message", addMessage);
+});
+
 </script>
 
 <template>

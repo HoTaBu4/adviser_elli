@@ -17,14 +17,12 @@ if (
 </script>
 
 <template>
-  <RouterView />
   <div class="app__container">
     <NotificationStack />
     <RouterView />
   </div>
 </template>
 
-<style scoped></style>
 <style scoped>
 .app__container {
   height: 100%;

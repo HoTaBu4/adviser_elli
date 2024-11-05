@@ -9,5 +9,5 @@ export default defineConfig({
       "@": "/src",
     },
   },
-  base: "/adviser_alli/",
+  base: "/adviser_elli/",
 });

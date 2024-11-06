@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref } from "vue";
 import PopUpMessage from "./PopUpMessage/PopUpMessage.vue";
-import EventBus from "../../../EventBus";
+import EventBus from "../../../EventBus.ts";
 
 interface Message {
   id: number;

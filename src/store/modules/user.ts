@@ -50,10 +50,9 @@ const actions = {
         if ("detail" in response) {
           EventBus.emit('notify',{text: response.detail,duration: 5})
         } else {
-          EventBus.emit('notify',{text: 'user is registred',duration: 5})
-        }
-        
-        router.replace('/Authentication/login')
+          EventBus.emit('notify',{text: 'user is registred',duration: 5});
+          router.replace('/Authentication/login')
+        }        
       })
       .finally(() =>commit("setLoading", false));
   },

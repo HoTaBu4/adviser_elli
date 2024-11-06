@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useStore } from "vuex";
 import { Languages } from "./store/types/LanguageType";
+import EventBus from "./EventBus";
+import NotificationStack from "./components/CommonComponents/NotificationStack/NotificationStack.vue";
 
 const browserNavigator = navigator;
 
@@ -14,10 +16,10 @@ if (
 } else {
   store.dispatch("language/updateLanguage");
 }
+
 </script>
 
 <template>
-  <RouterView />
   <div class="app__container">
     <NotificationStack />
     <RouterView />

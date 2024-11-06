@@ -3,7 +3,7 @@ import { LoginResponse, RegisterUser } from "../../store/types/UserType";
 import { client } from "../fetchClient";
 
 export const loginUser = (data: Omit<User, "username">) => {
-  return client.post<LoginResponse>("/user/token/", data);
+  return client.post<LoginResponse | {detail: string} | void>("/user/token/", data);
 };
 
 export const registerUser = (data: User) => {

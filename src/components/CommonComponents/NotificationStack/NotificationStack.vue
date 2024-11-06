@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import PopUpMessage from "./PopUpMessage/PopUpMessage.vue";
+import EventBus from "../../../EventBus";
 
 interface Message {
   id: number;
@@ -22,6 +23,17 @@ const removeMessage = (id: number) => {
     messages.value.splice(index, 1);
   }
 };
+
+onMounted(() => {
+  EventBus.on("notify", (payload) => {
+    const { text, duration } = payload as { text: string; duration?: number }; 
+    addMessage(text, duration);
+  });
+});
+
+onUnmounted(() => {
+  EventBus.off("notify");
+});
 </script>
 
 <template>

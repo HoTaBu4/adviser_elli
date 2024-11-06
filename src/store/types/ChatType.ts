@@ -17,5 +17,5 @@ export interface Chat {
 }
 
 export interface responseDetails {
-  details: string;
+  detail: string;
 }

@@ -67,7 +67,7 @@ const actions = {
     commit("setIsLoading", true);
     getAllChats()
       .then((data:any) => {
-        if (data.details) {
+        if (data.detail) {
           resetTheUser();
         } else {
           commit("addChats", data);

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useStore } from "vuex";
 import { Languages } from "./store/types/LanguageType";
+import NotificationStack from "./components/CommonComponents/NotificationStack/NotificationStack.vue";
 
 const browserNavigator = navigator;
 

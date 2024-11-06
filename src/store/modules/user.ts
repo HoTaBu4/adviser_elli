@@ -4,7 +4,7 @@ import { LoginResponse, LoginUser, RegisterUser, UserState } from "../types/User
 import { loginUser, registerUser } from "../../api/user/user";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 import { resetTheUser } from "../../services/authService";
-import EventBus from "../../EventBus";
+import EventBus from "../../EventBus.ts";
 import router from "../../routes/routes";
 
 interface CustomJwtPayload extends JwtPayload {
@@ -46,7 +46,6 @@ const actions = {
     commit("setLoading", true); 
     registerUser(user)
       .then((response:any) => {
-        console.log(response)
         if ("detail" in response) {
           EventBus.emit('notify',{text: response.detail,duration: 5})
         } else {

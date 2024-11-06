@@ -95,13 +95,14 @@
   }
 
   &__register-block {
-    flex-direction: row;
+    flex-direction: column;
     gap: 6px;
 
     @include center-element;
   }
 
   &__arrow-sign {
+    display: none;
   }
 
   &__register-text {
@@ -153,5 +154,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+}
+
+@media (min-width: 420px) {
+  .authentication {
+    &__register-block {
+      flex-direction: row;
+    }
+    &__arrow-sign {
+      display: block;
+    }
   }
 }

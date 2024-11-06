@@ -3,7 +3,9 @@ import store, { RootState } from "../store";
 import { LoginResponse, LoginUser, RegisterUser, UserState } from "../types/UserType";
 import { loginUser, registerUser } from "../../api/user/user";
 import { jwtDecode, JwtPayload } from "jwt-decode";
-import eventBus from "../../eventBus";
+import { resetTheUser } from "../../services/authService";
+import EventBus from "../../EventBus";
+import router from "../../routes/routes";
 
 interface CustomJwtPayload extends JwtPayload {
   id: number;
@@ -43,10 +45,15 @@ const actions = {
   async registationUser({commit}: any, user: RegisterUser) {
     commit("setLoading", true); 
     registerUser(user)
-      .then(() => {
-        eventBus.emit("add-message", { text: 'user is registred', duration: 5 });
+      .then((response:any) => {
+        console.log(response)
+        if ("detail" in response) {
+          EventBus.emit('notify',{text: response.detail,duration: 5})
+        } else {
+          EventBus.emit('notify',{text: 'user is registred',duration: 5})
+        }
         
-        commit("setLoading", false); 
+        router.replace('/Authentication/login')
       })
       .finally(() =>commit("setLoading", false));
   },
@@ -54,14 +61,16 @@ const actions = {
     commit("setLoading", true); 
 
     loginUser(user)
-      .then((response : LoginResponse | { detail: string }) => {
+      .then((response: any) => {
         if ("access_token" in response) {
+          resetTheUser();
           const data: CustomJwtPayload = jwtDecode(response.access_token);
-          commit('setUser',{email: data.sub, id: data.id})
+          commit('setUser', { email: data.sub, id: data.id });
           router.push({ path: '/home' });
           document.cookie = `token=${response.access_token}; path=/; max-age=3600; SameSite=Strict; Secure`;
-        } else if ("detail" in response) {
-          eventBus.emit("add-message", { text: response.detail, duration: 5 });
+        } 
+        else if ("detail" in response) {
+          EventBus.emit('notify', {text: response.detail, duration: 5})
         }
       })
       .catch(() => {})

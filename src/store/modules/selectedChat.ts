@@ -42,7 +42,7 @@ const mutations = {
     chat: SavedMessage | { details: object },
   ) {
     state.selectedChat = null;
-    if (!("details" in chat)) {
+    if (!("detail" in chat)) {
       state.selecedSaveMessage = chat as SavedMessage;
     }
   },
@@ -97,7 +97,7 @@ const actions = {
 
     retrieveChat(chatId)
       .then((response: Chat | responseDetails) => {
-        if (!("details" in response)) {
+        if (!("detail" in response)) {
           commit("setSelectedChat", { ...response, id: chatId });
         }
       })

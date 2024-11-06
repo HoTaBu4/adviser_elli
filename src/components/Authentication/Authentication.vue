@@ -117,20 +117,20 @@ const MainValidation = (event: Event) => {
 };
 
 const validateEmail = () => {
-  const emailRegex = /^([A-Za-z0-9_\-\.])+@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  // const emailRegex = /^([A-Za-z0-9_\-\.])+@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
   data.email.error = "";
 
-  if (!emailRegex.test(data.email.text)) {
-    data.email.error =
-      language.value === Languages.us
-        ? "Invalid email format"
-        : "Недійсний формат пошти";
-  } else {
+  // if (!emailRegex.test(data.email.text)) {
+  //   data.email.error =
+  //     language.value === Languages.us
+  //       ? "Invalid email format"
+  //       : "Недійсний формат пошти";
+  // } else {
     data.email.valid = true;
     goToNextField(FieldsTypes.password);
     data.email.valid = true;
-  }
+  // }
 };
 
 const validatePassword = () => {
@@ -144,8 +144,8 @@ const validatePassword = () => {
   } else if (data.password.text.slice(0,1) !== data.password.text.slice(0,1).toUpperCase()) {
     data.password.error =
       language.value === Languages.us
-        ? "1 - letter must be upperCase"
-        : "1 - перша літера має бути великою";
+        ? "first letter must be an upper case"
+        : "перша літера має бути великою";
   } else {
     data.password.valid = true;
   }
@@ -218,10 +218,19 @@ const validatePassword = () => {
       </div>
       
       <div class="authentication__register-block">
-        <div class="authentication__register-text" >
+        <div class="authentication__register-text" v-if="isLogin">
           {{language === Languages.us ? `don&#39;t have an accaunt?` : 'немає акаунта?'}}
         </div>
-        <svg height="8" viewBox="0 0 54 8" fill="none" xmlns="http://www.w3.org/2000/svg" class="authentication__arrow-sign">
+        <div class="authentication__register-text" v-if="!isLogin">
+          {{language === Languages.us ? `have an accaunt?` : 'є акаунт?'}}
+        </div>
+        <svg  
+          height="8"   
+          viewBox="0 0 54 8"  
+          fill="none"  
+          xmlns="http://www.w3.org/2000/svg"   
+          class="authentication__arrow-sign"  
+        >
           <path d="M53.3536 4.35355C53.5488 4.15829 53.5488 3.84171 53.3536 3.64645L50.1716 0.464466C49.9763 0.269204 49.6597 0.269204 49.4645 0.464466C49.2692 0.659728 49.2692 0.976311 49.4645 1.17157L52.2929 4L49.4645 6.82843C49.2692 7.02369 49.2692 7.34027 49.4645 7.53553C49.6597 7.7308 49.9763 7.7308 50.1716 7.53553L53.3536 4.35355ZM0 4.5H53V3.5H0V4.5Z" fill="#6E757C"/>
         </svg>
 
@@ -237,7 +246,7 @@ const validatePassword = () => {
           class="authentication__register-link"
           v-else
         >
-          {{ language === Languages.us ? "login" : "зайти"}}
+          {{ language === Languages.us ? "login" : "увійти"}}
         </RouterLink>
       </div>
       <div class="authentication__or">

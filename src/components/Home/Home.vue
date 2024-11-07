@@ -214,6 +214,7 @@ if (
           :guestChatId="createdChatId"
           :guestChat="true"
           :selectedThemeGuest="selectedThemeGuest"
+          @shoseTheme="isOpenSelectTheme = true"
         />
       </div>
     </main>

@@ -49,6 +49,7 @@ const textareaRef = ref<HTMLTextAreaElement | null>(null);
 const maxRows = ref<number>(5);
 const chatsItems = ref<Message[]>([]);
 const createdChatUser = ref<Chat | null>(null);
+const guestGettingAnswer = ref<boolean>(false)
 
 function autoResize() {
   const textarea = textareaRef.value;
@@ -70,13 +71,16 @@ function autoResize() {
 
 const handleSubmit = () => {
   if (!props.selectedChat?.selecedSaveMessage) {
-    if (props.guestChat && !!props.guestChatId) {
+    //for the guest messages
+    if (props.guestChat && !!props.guestChatId && !guestGettingAnswer.value) {
       const lastIndex = chatsItems.value.length;
+      guestGettingAnswer.value = true
       chatsItems.value.push({
         content: text.value,
         is_ai_response: false,
         id: lastIndex + 1,
       });
+      text.value = ''
 
       client
         .post(`/chats/${props.guestChatId}/guest/message`, {
@@ -88,7 +92,8 @@ const handleSubmit = () => {
             is_ai_response: true,
             id: lastIndex + 1,
           });
-        });
+        }).finally(() => guestGettingAnswer.value = false)
+        //for the user first message
     } else if (
       !props.guestChat &&
       text.value.trim() !== "" &&
@@ -126,6 +131,7 @@ const handleSubmit = () => {
             emit("resetTheme");
           });
       });
+    // for the user messages
     } else if (
       !props.guestChat &&
       text.value.trim() !== "" &&
@@ -138,8 +144,13 @@ const handleSubmit = () => {
 };
 
 const createNewChat = () => {
-  emit("shoseTheme");
-  store.commit("selectedChat/reset");
+  if (!props.guestChat) {
+    emit("shoseTheme");
+    store.commit("selectedChat/reset");
+  } else {
+    chatsItems.value = [];
+    emit("shoseTheme");
+  }
 };
 
 onMounted(() => {

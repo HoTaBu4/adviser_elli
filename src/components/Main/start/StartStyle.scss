@@ -75,6 +75,9 @@
     display: flex;
     justify-content: center;
     gap: 16px;
+    & > :nth-child(n) {
+      cursor: pointer;
+    }
   }
 
   &__modal {
@@ -157,6 +160,7 @@
 
   .buttons-container {  
     &__buttons {
+      flex-direction: column;
       &__ukrainian {
         flex-direction: column;
       }

@@ -19,9 +19,12 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: url("/pictures/images/back__main__dekstop.png");
+  background: url('/public/pictures/images/main__background.png');
   background-size: cover;
   overflow: auto;
+  @media(min-width: 640px) {
+    background: url("/pictures/images/back__main__dekstop.png");
+  }
 }
 
 a,

@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "lint": "eslint \"**/*.{ts,vue}\"",
     "format": "prettier .  --write",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "build": "vue-cli-service build"
   },
   "dependencies": {
     "@vue/cli-service": "^5.0.8",

@@ -9,5 +9,8 @@ export default defineConfig({
       "@": "/src",
     },
   },
+  build: {
+    outDir: 'dist'
+  },
   base: "/adviser_elli/",
 });

@@ -24,6 +24,7 @@ body {
   overflow: auto;
   @media(min-width: 640px) {
     background: url("/pictures/images/back__main__dekstop.png");
+    background-size: cover;
   }
 }
 

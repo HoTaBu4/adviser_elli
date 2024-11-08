@@ -9,10 +9,10 @@
     "preview": "vite preview",
     "lint": "eslint \"**/*.{ts,vue}\"",
     "format": "prettier .  --write",
-    "deploy": "vite build && gh-pages -d dist",
     "clean": "rimraf dist"
   },
   "dependencies": {
+    "@vue/cli-service": "^5.0.8",
     "jwt-decode": "^4.0.0",
     "marked": "^14.1.2",
     "mitt": "^3.0.1",
